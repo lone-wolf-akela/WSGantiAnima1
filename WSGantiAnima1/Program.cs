@@ -23,13 +23,27 @@ namespace WSGantiAnima1
             Console.Write("密码：");
             
             string password = "";
-            char c = Console.ReadKey().KeyChar;
-            while (c != '\r' && c != '\n')
-            {               
-                password += c;
-                Console.Write("\b*");
-                c = Console.ReadKey().KeyChar;
+            ConsoleKeyInfo key;
+
+            do
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    password += key.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                    {
+                        password = password.Substring(0, (password.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
             }
+            while (key.Key != ConsoleKey.Enter);
 
             Console.WriteLine();            
             var core = new Warshipgirls
@@ -100,6 +114,9 @@ namespace WSGantiAnima1
                 JToken shipdata = (from JToken ship in core.init_txt["shipCardWu"]
                     where ship["cid"].ToString() == myship["shipCid"].ToString()
                     select ship).FirstOrDefault();
+                JToken shipdataX = (from JToken ship in core.init_txt["shipCard"]
+                    where ship["cid"].ToString() == myship["shipCid"].ToString()
+                    select ship).FirstOrDefault();
                 int country = (int) shipdata["country"];
                 Console.WriteLine($"国籍:{country}");
                 if (country != 1)
@@ -112,10 +129,17 @@ namespace WSGantiAnima1
                     .Replace("日", "曰")
                     .Replace(" ", "")
                     .Replace("\t", "");
-                Console.WriteLine($"真名:{realname}");
+                string Xname = shipdataX["title"].ToString();
+                Console.WriteLine($"真名:{realname}\t和谐名:{Xname}");
                 if (currentname == realname)
                 {
                     Console.WriteLine("名字正确，无需修改。");
+                    Console.WriteLine("===============================");
+                    continue;
+                }
+                if (currentname != Xname)
+                {
+                    Console.WriteLine("自定义船名，跳过。");
                     Console.WriteLine("===============================");
                     continue;
                 }
