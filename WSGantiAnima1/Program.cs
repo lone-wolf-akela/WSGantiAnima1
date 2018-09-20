@@ -14,7 +14,7 @@ namespace WSGantiAnima1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("WSGantiAnima1 v0.0.1 by Lone_Wolf");
+            Console.WriteLine("WSGantiAnima1 by Lone_Wolf");
 
             Directory.CreateDirectory("Documents");
 
@@ -64,10 +64,10 @@ namespace WSGantiAnima1
             switch (choice)
             {
                 case "1":
-                    core.channel = 100017;
+                    core.channel = 100011;
                     break;
                 case "2":
-                    core.channel = 100020;
+                    core.channel = 100111;
                     break;
                 default:
                     Console.Write("无效的选项，请重新选择：");
