@@ -50,7 +50,7 @@ namespace WSGantiAnima1
             {
                 username = username,
                 password = password,
-                version = "3.3.0",
+                version = "4.0.2",
                 market = 2,
                 firstSever = @"http://version.jr.moefantasy.com/"
             };
@@ -64,7 +64,7 @@ namespace WSGantiAnima1
             switch (choice)
             {
                 case "1":
-                    core.channel = 100011;
+                    core.channel = 100010;
                     break;
                 case "2":
                     core.channel = 100111;
